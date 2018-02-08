@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coding Challenge 1</title>
+</head>
+<body>
+    <nav></nav>
+    
+    <header>
+        <h1>Welcome to the Silly Sillygame</h1>
+    </header>
+
+    <article>
+        <section id="playerA">
+            <h2>Player A</h2>
+
+            <form action="data.php" method="post">
+                <label for="namePlayerA">Name for player A: </label><input type="Text" maxlength="10" placeholder="Short name" name="namePlayerA" required id="namePlayerA"><br>
+                <label for="agePlayerA">Age for player A: </label><input type="number" max="99" min="8" placeholder="Age" name="agePlayerA" required id="agePlayerA"><br>
+                <label for="heightPlayerA">Height for player A: </label><input type="number" max="250" min="150" placeholder="Height" name="heightPlayerA" required id="heightPlayerA"><br>
+            </form>
+        </section>
+
+        <section id="playerB">
+            <h2>Player B</h2>
+
+            <form action="data.php" method="post">
+                    <label for="namePlayerB">Name for player A: </label><input type="Text" maxlength="10" placeholder="Short name" name="namePlayerB" required id="namePlayerB"><br>
+                    <label for="agePlayerB">Age for player B: </label><input type="number" max="99" min="8" placeholder="Age" name="agePlayerB" required id="agePlayerB"><br>
+                    <label for="heightPlayerB">Height for player A: </label><input type="number" max="250" min="150" placeholder="Height" name="heightPlayerB" required id="heightPlayerB"><br>
+            </form>
+        </section>
+
+        <section>
+                <button onclick="playSilliness(heightPlayerA, heightPlayerB, agePlayerA, agePlayerB)">¡Play!</button>
+        </section>
+
+        <section>
+                <span id="gameResult"></span>
+            </section>
+    </article>
+    
+    <script src="CodingChallenge1.js"></script>
+</body>
+</html>
