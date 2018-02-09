@@ -28,14 +28,19 @@
             <h2>Player B</h2>
 
             <form action="data.php" method="post">
-                    <label for="namePlayerB">Name for player A: </label><input type="Text" maxlength="10" placeholder="Short name" name="namePlayerB" required id="namePlayerB"><br>
+                    <label for="namePlayerB">Name for player B: </label><input type="Text" maxlength="10" placeholder="Short name" name="namePlayerB" required id="namePlayerB"><br>
                     <label for="agePlayerB">Age for player B: </label><input type="number" max="99" min="8" placeholder="Age" name="agePlayerB" required id="agePlayerB"><br>
-                    <label for="heightPlayerB">Height for player A: </label><input type="number" max="250" min="150" placeholder="Height" name="heightPlayerB" required id="heightPlayerB"><br>
+                    <label for="heightPlayerB">Height for player B: </label><input type="number" max="250" min="150" placeholder="Height" name="heightPlayerB" required id="heightPlayerB"><br>
             </form>
         </section>
 
+        <section id="playerC">
+            <button onclick="addThirdPlayer()">Add 3erd player</button>
+
+        </section>
+
         <section>
-                <button onclick="playSilliness(heightPlayerA, heightPlayerB, agePlayerA, agePlayerB)">¡Play!</button>
+            <button onclick="playSilliness()">¡Play!</button>
         </section>
 
         <section>
