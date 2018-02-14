@@ -12,7 +12,7 @@ var turnOf = 0;
 
 console.log("Turno del jugador 0");
 
-function RollDice(player) {
+function rollDice(player) {
     //Comprobamos que lo ha pulsado el jugador correcto:
     if (player == turnOf) {
 
@@ -41,7 +41,7 @@ function RollDice(player) {
     }
 }
 
-function Hold() {
+function hold() {
     //Pasamos los puntos del roundScore al GlobalScore.
     players[turnOf] += roundScore;
     document.getElementById("score"+turnOf).innerHTML = players[turnOf];
@@ -61,12 +61,5 @@ function passTheToken() {
     //Se actualiza el dato
     document.getElementById("current"+turnOf).innerHTML = roundScore;
     //Y se pasa el testigo.
-    switch (turnOf) {
-        case 0:
-            turnOf = 1;
-            break;
-        case 1:
-            turnOf = 0;
-            break;
-    }
+    turnOf = turnOf === 0 ? turnOf = 1 : turnOf = 0;
 }
