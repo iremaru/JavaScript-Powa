@@ -27,7 +27,7 @@ var years = [
     2007,
     2008,
     2009,
-    2010,
+    1456,
 ];
 
 
@@ -36,13 +36,13 @@ function printFullAge(years){
     var fullAges = [];
 
     for (i = 0; i < years.length; i++) {
-        ages[i] = years[i] - 2018;
-        if (ages[1] >= 18) {
+        ages[i] = 2018 -  years[i];
+        if (ages[i] >= 18) {
             fullAges[i] = true;
             console.log("It's full age.");
         } else {
             fullAges[i] = false;
-            console.log("Is not full age.");
+            console.log( i + " is not full age.");
         }
     }
 

@@ -1,0 +1,53 @@
+/*/////////////////////////////////////////////////////////////////////
+                                GENERAL
+/////////////////////////////////////////////////////////////////////*/
+
+body {
+    background-color: #fffcf0;
+    /*color: #fbd14b;*/
+    color: #6a60a9;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+button {
+    min-height: 20px;
+    min-width: 20px;
+}
+
+/*/////////////////////////////////////////////////////////////////////
+                                USER INPUT
+/////////////////////////////////////////////////////////////////////*/
+
+.bar,.bar_rail {
+    position: absolute;
+    background-color: #6a60a9;
+    padding: 10px 10px 10px 10px;
+    margin: -8px;
+    /*TEXT*/
+}
+
+.add_amount {
+    width: 100px;
+}
+
+.add_description {    
+    width: 200px;
+}
+
+.btn-delete {
+    font-size: 15px;
+    color: tomato;
+}
+
+/*/////////////////////////////////////////////////////////////////////
+                                MAIN
+/////////////////////////////////////////////////////////////////////*/
+
+#activity {
+    position: absolute;
+    margin-top: 100px;
+    
+}
