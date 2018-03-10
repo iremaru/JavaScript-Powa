@@ -10,6 +10,44 @@ function $(id) {
 */
 
 // Controlador para el presupuesto
+
+var storageController = (function (){
+
+    if (!localStorage.getItem("exp")) {
+        //Significa que no se ha creado el item y lo creamos.
+        console.log("¡No existe ese item!");
+    } else {
+        //Significa que se ha declarado ese item y lo usamos.
+        console.log("¡Usemos ese item!");
+    }
+
+    const data = {
+        allItems: {
+            exp: [],
+            inc: []
+        },
+        totals: {
+            exp: 0,
+            inc: 0
+        },
+        budget: 0,
+        percentage: -1
+    };
+
+    console.log(data);
+
+    return {
+        createStorage: function () {
+            localStorage.setItem("data_allExp", data.allItems.exp.value );
+        },
+
+        updateStorage: function () {
+
+        }
+    };
+})();
+
+
 var budgetController = (function () {
 
     var Expense = function(id, description, value) {
@@ -168,7 +206,8 @@ var UIController = (function () {
         expenseLabel: "budget_expenses-value",
         percentageLabel: "budget_expenses-percentage",
         activity: "activity",
-        expensesPercLabel: "item_percentage"
+        expensesPercLabel: "item_percentage",
+        dateLabel: "budget_title-month",
     };
 
     var formatNumber = function (num, type) {
@@ -203,6 +242,12 @@ var UIController = (function () {
         }
 
         return (type === "exp" ? "- " : "+ ") + int + "." + dec;
+    };
+
+    var nodeListForEach = function(list, callback){
+        for (let i = 0; i < list.length; i++) {
+            callback(list[i], i);
+        }
     };
 
     //API
@@ -284,12 +329,6 @@ var UIController = (function () {
         displayPercentages: function(percentages){
             var fields = document.querySelectorAll("#" + DOMids.expensesPercLabel);
 
-            var nodeListForEach = function(list, callback){
-                for (let i = 0; i < list.length; i++) {
-                    callback(list[i], i);
-                }
-            };
-
             nodeListForEach(fields, function(current, index){
                 if (percentages[index] > 0) {
                     current.textContent = percentages[index] + "%";
@@ -304,6 +343,49 @@ var UIController = (function () {
             //Como sólo se puede eliminar un descendiente de un elemento, vamos a asceder al padre del elemento y luego eliminar al elemento llamándolo como su descendiente.
             $(selectorID).parentNode.removeChild($(selectorID));
         },
+
+        displayMonth: function() {
+            var now, year, months, month;
+
+            months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+            now = new Date();
+
+            year = now.getFullYear();
+            month = months[now.getMonth()];
+
+            $(DOMids.dateLabel).textContent = month + " " + year;
+        },
+
+        changedType: function() {
+            console.log("Ha cambiado");
+            var fields;
+
+            fields = document.querySelectorAll(
+                "#" + DOMids.inputType + ", #" +
+                DOMids.inputDescription + ", #" +
+                DOMids.inputValue
+            );
+
+            nodeListForEach(fields, function(current){
+                current.classList.toggle("red-focus");
+            });
+
+            $(DOMids.btnAdd).classList.toggle("red");
+        }
 
     };
 
@@ -328,9 +410,11 @@ var controller = (function (budgetCtrl, UICtrl) {
             }
         });
 
-        //EVENTO DELEGADO -->
+        //EVENTO DELEGADO --> Al pulsar en la zona de Activity
         $(DOM.activity).addEventListener("click", ctrlDeleteItem);
         console.log(DOM.activity);
+
+        $(DOM.inputType).addEventListener("change", UICtrl.changedType);
     }
 
     //Función para eliminar elementos
@@ -409,6 +493,7 @@ var controller = (function (budgetCtrl, UICtrl) {
     return {
         init: function(){
             console.log("¡La aplicación se ha iniciado!");
+            UICtrl.displayMonth();
             UICtrl.displayBudget(
                 {
                     budget:0,

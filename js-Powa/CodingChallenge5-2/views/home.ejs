@@ -1,0 +1,47 @@
+
+<script src="../node_modules/ejs/ejs.js"></script>
+<% include partials/header %>
+
+<header>
+    <h1>Coding Challenge 5</h1>
+</header>
+
+<section id="Formulario">
+    <header>
+        <h2>Formulario</h2>
+    </header>
+
+    <div id="form_elemento">
+        Elemento de la población: <br>
+
+        <label for="elemento_nombre">Nombre</label>
+        <input type="text" id="elemento_nombre" placeholder="Nombre" size="10" required><br>
+
+        <label for="tipo">Tipo:</label>
+        <select name="tipo" id="elemento_tipo" required>
+            <option value="parque">parque</option>
+            <option value="calle">calle</option>
+        </select><br>
+
+        <label for="elemento_fundacion">Fecha fundacional</label>
+        <input type="date" name="fecha_fundacion" id="elemento_fundacion" required><br>
+    </div>
+
+    <div id="form_subelemento">
+
+    </div>
+</section>
+
+<section id="Informe">
+    <header>
+        <h2>Informe</h2>
+    </header>
+
+    <div id="resultado_informe">
+        <p>La densidad de cada parque en la ciudad es de:
+            <meter min="200" max="500" value="350">350 árbol por m3</meter>
+        </p>
+    </div>
+</section>
+
+<% include partials/footer %>

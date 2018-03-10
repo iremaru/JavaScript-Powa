@@ -1,0 +1,14 @@
+{
+  "name": "powa",
+  "version": "1.0.0",
+  "description": "Apps que usan el poder de node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "iremaru",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.5"
+  }
+}

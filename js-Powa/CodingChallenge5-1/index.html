@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coding Challenge 5</title>
+</head>
+<body>
+    <header>
+        <h1>Coding Challenge 5</h1>
+    </header>
+    
+    <section id="Formulario">
+        <header>
+            <h2>Formulario</h2>
+        </header>
+
+        <div id="form_elemento">
+            Elemento de la población: <br>
+
+            <label for="elemento_nombre">Nombre</label>
+            <input type="text" id="elemento_nombre" placeholder="Nombre" size="10" required><br>
+
+            <label for="tipo">Tipo:</label>
+            <select name="tipo" id="elemento_tipo" required>
+                <option value="parque">parque</option>
+                <option value="calle">calle</option>
+            </select><br>
+
+            <label for="elemento_fundacion">Fecha fundacional</label>
+            <input type="date" name="fecha_fundacion" id="elemento_fundacion" required><br>
+        </div>
+
+        <div id="form_subelemento">
+
+        </div>
+        <!--
+        <div id="elemento_parque">
+            <label for="parque_arboles">Cantidad de árboles</label>
+            <input type="number" name="parque_arboles" id="parque_arboles" min="1" required><br>
+
+            <label for="parque_area">Área</label>
+            <input type="number" id="parque_area" min="1" required>m3<br>
+        </div>
+
+        <div id="elemento_calle">
+            <label for="calle_largo">Largo en metros:</label>
+            <input type="number" name="calle_largo" id="calle_largo" min="20" required>m.<br>
+
+            <label for="cale_tamanio">Tamaño de la calle</label>
+            <select name="calle_tamanio" id="calle_tamanio">
+                <option value="tiny">Minuscula</option>
+                <option value="small">Pequeña</option>
+                <option value="normal" selected>Normal</option>
+                <option value="big">Grande</option>
+                <option value="huge">Enorme</option>
+            </select>
+        </div>-->
+
+    </section>
+
+    <section id="Informe">
+        <header>
+            <h2>Informe</h2>
+        </header>
+
+        <div id="resultado_informe">
+            <p>La densidad de cada parque en la ciudad es de:
+                <meter min="200" max="500" value="350">350 árbol por m3</meter>
+            </p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
