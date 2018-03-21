@@ -36,7 +36,7 @@ const dataController = (function(){
     }
 
     //ALMACÉN
-    const almacenDeDatos = {
+    let almacenDeDatos = {
         parques: {
             edadPromedio: 0,
             masArbolado: {},
@@ -47,7 +47,6 @@ const dataController = (function(){
             listado: []
         }
     };
-
 
     // ==========================================================================
     //       CREACION DE DATOS
@@ -115,6 +114,20 @@ const dataController = (function(){
             }
     };
 
+    // ==========================================================================
+    //       INTERACTUAR CON EL ALMACENAJE LOCAL
+    // ==========================================================================
+
+    const almacenarDatos = () => {
+        localStorage.setItem("datos", JSON.stringify(almacenDeDatos));
+        console.log("Jasón está en el nido.");
+    };
+
+    const recogerYactualizarDatosAlmacenados = () => {
+        almacenDeDatos = JSON.parse(localStorage.getItem("datos"));
+        return almacenDeDatos;
+    };
+
     return {
 
         nuevoParque: (nombre, fechaFundacional, area, numeroArboles) => {new Parque(nombre, fechaFundacional, area, numeroArboles);},
@@ -130,6 +143,9 @@ const dataController = (function(){
         vias_calcularLargoTotalyPromedio,
 
         extraerDatos: viasOparques => viasOparques === "parques" ? almacenDeDatos.parques : almacenDeDatos.vias,
+
+        almacenarDatos,
+        recogerYactualizarDatosAlmacenados
     };
 
 })();
@@ -144,25 +160,24 @@ const UIController = (function(){
         parqueArboles: "parque_arboles",
         parqueArea: "parque_area",
         calleLargo: "calle_largo",
-        calleTamanio: "calle_tamanio"
+        calleTamanio: "calle_tamanio",
+        btn_actualizar: "btn_actualizar"
     };
 
     //Mostrar la segunda parte del formulario según se elija el tipo calle o el tipo parque.
     function mostrarPorTipo(tipo){
         if (tipo === "parque") {
-            $(id.subelemento).innerHTML = '<div id="elemento_parque"><label for="parque_arboles">Cantidad de árboles</label><input type="number" name="parque_arboles" id="parque_arboles" min="1" required><br><label for="parque_area">Área</label><input type="number" id="parque_area" min="1" required>m3<br></div>';
+            $(ids.subelemento).innerHTML = '<div id="elemento_parque"><label for="parque_arboles">Cantidad de árboles</label><input type="number" name="parque_arboles" id="parque_arboles" min="1" required><br><label for="parque_area">Área</label><input type="number" id="parque_area" min="1" required>m3<br></div><br><input type="submit" value="Actualizar" id="btn_actualizar">';
 
-        } else {
-            $(id.subelemento).textContent = "Adios";
+        } else if (tipo === "calle") {
+            $(ids.subelemento).innerHTML = '<div id="elemento_calle"><label for="calle_largo">Largo en metros:</label><input type="number" name="calle_largo" id="calle_largo" min="20" required>m.<br><label for="cale_tamanio">Tamaño de la calle</label><select name="calle_tamanio" id="calle_tamanio"><option value="tiny">Minuscula</option><option value="small">Pequeña</option><option value="normal" selected>Normal</option><option value="big">Grande</option><option value="huge">Enorme</option></select><br><input type="submit" value="Actualizar" id="btn_actualizar"></div>';
         }
     }
 
     return {
         getIds: () => ids,
 
-        mostrarSubelemento: function(tipo){
-            return mostrarPorTipo(tipo);
-        }
+        mostrarSubelemento: mostrarPorTipo
     };
 })();
 
@@ -172,6 +187,34 @@ const director = (function(data, UI){
     Almacenar los datos que ingrese el usuario.
     Mostrar un informe con en la interfaz.
     */
+
+    function storageDisponible(type){
+
+        try {
+            const storage = window[type],
+                x = "__storage_test__";
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            console.log("Campo libre, chicos. ¡Podemos poblar este almacén!");
+            return true;
+
+        } catch (error) {
+            console.log("¡Oh, no! No hay almacenamiento por aquí.");
+            return error instanceof DOMException && (
+                error.code === 22 ||
+                error.code === 1014 ||
+                error.name === "QuotaExceededError" ||
+                error.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+                storage.length !== 0;
+        }
+
+        /*
+        if (storageAvailable('localStorage')) {
+            console.log("Campo libre, chicos. ¡Podemos poblar este almacén!");
+        } else {
+            console.log("¡Oh, no! No hay almacenamiento por aquí.");
+        }*/
+    }
 
     function escuchasDeEventos(){
         const id = UI.getIds();
@@ -242,9 +285,17 @@ const director = (function(data, UI){
     return {
         inicializacion: function(){
             console.log("¡Inicializando!");
+            const pruebaAlmacenamiento = storageDisponible("localStorage");
+            
+            console.log(pruebaAlmacenamiento);
             console.log(`El año actual es ${fechaActual}`);
             escuchasDeEventos();
             mostrarInformeAnual();
+
+            if (storageDisponible("localStorage")) {
+                data.almacenarDatos();
+                console.log(data.recogerYactualizarDatosAlmacenados());
+            }
         },
 
         mostrarInformeAnual

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +24,7 @@
 
             <label for="tipo">Tipo:</label>
             <select name="tipo" id="elemento_tipo" required>
+                <option value="elegir" selected disabled>Selecciona uno</option>
                 <option value="parque">parque</option>
                 <option value="calle">calle</option>
             </select><br>
@@ -33,7 +34,7 @@
         </div>
 
         <div id="form_subelemento">
-
+            
         </div>
         <!--
         <div id="elemento_parque">
@@ -41,7 +42,8 @@
             <input type="number" name="parque_arboles" id="parque_arboles" min="1" required><br>
 
             <label for="parque_area">Área</label>
-            <input type="number" id="parque_area" min="1" required>m3<br>
+            <input type="number" id="parque_area" min="1" required>m3<br><br>
+            <input type="submit" value="Actualizar" id="btn_actualizar">
         </div>
 
         <div id="elemento_calle">
@@ -55,7 +57,8 @@
                 <option value="normal" selected>Normal</option>
                 <option value="big">Grande</option>
                 <option value="huge">Enorme</option>
-            </select>
+            </select><br>
+            <input type="submit" value="Actualizar" id="btn_actualizar">
         </div>-->
 
     </section>

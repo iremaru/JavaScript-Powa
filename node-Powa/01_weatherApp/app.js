@@ -1,8 +1,33 @@
-const request = require("request");
+const yargs = require("yargs"), geocode = require("./modulos/geocode"), darksky = require("./modulos/darksky");
 
-request({
-    url: "https://maps.googleapis.com/maps/api/geocode/json?address=1301+lombard+philadelhia&key=AIzaSyCEjV9McZkcUxvT8SWSyZfF7avggBVO_Zs",
-    json: true
-}, (error, response, body) => {
-    console.log(`Dirección: ${body.results[0].formatted_address}`);
+const argv = yargs
+    .options({
+        a: {
+            demand: true,
+            alias: "address",
+            describe: "Adress to fetch weather for",
+            string: true
+        }
+    })
+    .help()
+    .argv;
+
+geocode.geocodeAddress(argv.a, (errorMessage, results) => {
+    if (errorMessage) {
+        console.log(errorMessage);
+    } else {
+        //console.log(JSON.stringify(results, undefined, 4));
+        console.log(results.address);
+        darksky.darksky(results.latitud, results.longitude, (respuesta) => {
+            if (respuesta === "Imposible determinar el tiempo."){
+                console.log(respuesta);
+            } else {
+                const temperatura = respuesta.respuestaCorta;
+                const sensacionTermC = respuesta.sensacionTermicaC;
+                console.log(`La sensación térmica es de ${respuesta.sensacionTermicaC}`);    
+            }
+        });
+
+    }
+
 });
